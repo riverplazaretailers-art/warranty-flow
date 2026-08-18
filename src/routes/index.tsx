@@ -179,23 +179,24 @@ function Hero() {
             We&rsquo;ll own the warranty workflow.
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Two River Ops is building a managed warranty operation for equipment dealers: repair
-            records become complete claims, routine exceptions get worked, reimbursement is tracked,
-            and only missing facts come back to your team. The goal is more warranty dollars
-            recovered with less administrative load inside the dealership.
+            Two River Ops is a managed warranty operation for equipment dealers. We execute the
+            claim work — building, validating, filing and following through to reimbursement — so
+            the dealership carries less administrative load, recovers more of the warranty dollars
+            it has legitimately earned, and gets paid sooner. Accountability and OEM controls stay
+            where they belong.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
-              href="#pilot"
+              href="#audit"
               className="inline-flex h-11 items-center rounded-sm bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
             >
-              Join the pilot
+              Start with a leakage audit
             </a>
             <a
-              href="#warranty"
+              href="#pilot"
               className="inline-flex h-11 items-center rounded-sm border border-border px-6 text-sm font-medium transition-colors hover:border-foreground/30 hover:bg-stone-warm"
             >
-              See how it works
+              Join the managed pilot
             </a>
           </div>
         </div>
