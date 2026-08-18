@@ -27,6 +27,7 @@ export type Database = {
           name: string
           note: string | null
           oem_brands: string | null
+          oem_intro_ok: boolean | null
           source: string
           work_email: string
         }
@@ -42,6 +43,7 @@ export type Database = {
           name: string
           note?: string | null
           oem_brands?: string | null
+          oem_intro_ok?: boolean | null
           source?: string
           work_email: string
         }
@@ -57,6 +59,7 @@ export type Database = {
           name?: string
           note?: string | null
           oem_brands?: string | null
+          oem_intro_ok?: boolean | null
           source?: string
           work_email?: string
         }
