@@ -716,6 +716,19 @@ function PilotForm() {
             placeholder="Current process, backlog, anything relevant."
           />
         </div>
+        <label
+          htmlFor="oem_intro_ok"
+          className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-muted-foreground"
+        >
+          <input
+            id="oem_intro_ok"
+            name="oem_intro_ok"
+            type="checkbox"
+            className="mt-[3px] h-4 w-4 shrink-0 accent-[var(--accent)]"
+          />
+          I&rsquo;m open to introducing Two River Ops to our OEM representative if the pilot is
+          successful.
+        </label>
         <div aria-hidden className="hidden">
           <label htmlFor="website">Website</label>
           <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
