@@ -144,6 +144,12 @@ function Nav() {
         </a>
         <nav className="flex items-center gap-6">
           <a
+            href="#audit"
+            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Leakage audit
+          </a>
+          <a
             href="#warranty"
             className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
