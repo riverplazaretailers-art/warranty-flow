@@ -1,0 +1,1 @@
+DELETE FROM public.pilot_leads WHERE work_email = 'alex@dealer.com';
