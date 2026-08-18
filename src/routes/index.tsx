@@ -4,9 +4,10 @@ import { useState } from "react";
 
 import { submitPilotLead } from "@/lib/pilot-leads.functions";
 
-const TITLE = "Two River Ops | Managed Warranty Administration for Equipment Dealers";
+const TITLE =
+  "Two River Ops | Managed Warranty Administration & Warranty Leakage Audit for Equipment Dealers";
 const DESCRIPTION =
-  "Two River Ops is building a managed warranty operation for equipment dealers: repair records become complete claims, routine exceptions are worked, reimbursement is tracked, and internal administrative burden drops.";
+  "Two River Ops owns warranty performance for equipment dealers: a fixed-fee warranty leakage audit followed by managed warranty administration — less admin burden, more legitimate warranty dollars recovered, faster claim-to-cash.";
 
 export const Route = createFileRoute("/")({
   component: Index,
