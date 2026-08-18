@@ -645,6 +645,7 @@ function PilotForm() {
                 | "",
               admin_shared_role_note: String(fd.get("admin_shared_role_note") ?? ""),
               note: String(fd.get("note") ?? ""),
+              oem_intro_ok: fd.get("oem_intro_ok") === "on",
               website: String(fd.get("website") ?? ""),
             },
           });
