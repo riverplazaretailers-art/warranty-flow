@@ -47,6 +47,7 @@ export const submitPilotLead = createServerFn({ method: "POST" })
         data.admin_shared_role === "yes" ? true : data.admin_shared_role === "no" ? false : null,
       admin_shared_role_note: data.admin_shared_role_note || null,
       note: data.note || null,
+      oem_intro_ok: data.oem_intro_ok,
       source: "website",
     });
 
