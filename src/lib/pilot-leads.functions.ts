@@ -12,6 +12,7 @@ const leadSchema = z.object({
   admin_shared_role: z.enum(["yes", "no", ""]).optional().default(""),
   admin_shared_role_note: z.string().trim().max(500).optional().default(""),
   note: z.string().trim().max(1000).optional().default(""),
+  oem_intro_ok: z.boolean().optional().default(false),
   website: z.string().max(200).optional().default(""),
 });
 
