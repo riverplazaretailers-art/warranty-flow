@@ -105,7 +105,10 @@ function Index() {
         <HowItWorks />
         <Pillars />
         <Differentiation />
+        <LeakageAudit />
         <Products />
+        <OperatingModes />
+        <OemControls />
         <Pilot />
         <About />
       </main>
