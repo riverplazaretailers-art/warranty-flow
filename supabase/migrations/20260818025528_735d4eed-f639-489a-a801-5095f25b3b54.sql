@@ -1,0 +1,1 @@
+ALTER TABLE public.pilot_leads ADD COLUMN IF NOT EXISTS oem_intro_ok boolean;
