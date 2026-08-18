@@ -382,12 +382,79 @@ function Differentiation() {
   );
 }
 
+function LeakageAudit() {
+  const findings = [
+    "Warrantable repairs that were never filed",
+    "Denied or short-paid claims never corrected",
+    "Filing windows that were missed",
+    "Labor operations or parts omitted from a claim",
+    "Claims started and then abandoned",
+  ];
+  return (
+    <section id="audit" className="border-b border-border">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <SectionHead
+          eyebrow="First engagement"
+          title="Start with a Warranty Leakage Audit."
+          lead="A 12-month look-back that compares your repair orders against what was actually filed and paid, so the gap is measured before anyone changes how the department runs."
+        />
+        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-[1.2fr_1fr]">
+          <div className="bg-background p-7 sm:p-10">
+            <p className="eyebrow">What the look-back surfaces</p>
+            <ul className="mt-7 space-y-3.5">
+              {findings.map((f) => (
+                <li key={f} className="flex gap-3 text-sm">
+                  <span aria-hidden className="mt-[9px] h-px w-4 shrink-0 bg-accent" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-card p-7 sm:p-10">
+            <p className="eyebrow">How it is scoped</p>
+            <ul className="mt-7 space-y-3.5 text-sm text-muted-foreground">
+              {[
+                "Fixed fee — no contingency percentage",
+                "One OEM program to start",
+                "Capped claim volume",
+                "Findings you own, whether or not we go further",
+              ].map((t) => (
+                <li key={t} className="flex gap-3">
+                  <span aria-hidden className="mt-[9px] h-px w-4 shrink-0 bg-border" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="mt-6 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+          Any resubmission of an identified claim follows the OEM&rsquo;s own program rules and
+          filing windows, executed with the dealer.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function Products() {
   return (
     <section className="border-b border-border bg-stone-warm">
       <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
-        <SectionHead eyebrow="Products" title="Two ways to start." />
+        <SectionHead eyebrow="Engagements" title="Audit first. Then the ongoing operation." />
         <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-2">
+          <article className="bg-stone-warm p-8 sm:p-10">
+            <div className="flex items-center gap-3">
+              <h3 className="text-xl font-semibold tracking-tight">Warranty Leakage Audit</h3>
+              <span className="rounded-sm border border-border px-2 py-[3px] font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                First step
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              A fixed-fee, 12-month look-back covering unfiled, denied, short-paid, expired and
+              abandoned claims — recovery work included in the engagement rather than sold
+              separately.
+            </p>
+          </article>
           <article className="bg-stone-warm p-8 sm:p-10">
             <div className="flex items-center gap-3">
               <h3 className="text-xl font-semibold tracking-tight">Managed Warranty</h3>
@@ -397,16 +464,78 @@ function Products() {
             </div>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
               Ongoing administration from repair record through reimbursement, including routine
-              exception handling and reconciliation.
-            </p>
-          </article>
-          <article className="bg-stone-warm p-8 sm:p-10">
-            <h3 className="text-xl font-semibold tracking-tight">Recovery</h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              A fixed-fee review of denied, short-paid, missed, aging or abandoned warranty claims.
+              exception handling, parts-retention prompts and reconciliation.
             </p>
           </article>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function OperatingModes() {
+  return (
+    <section className="border-b border-border">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <SectionHead
+          eyebrow="Operating modes"
+          title="Two operating modes."
+          lead="Dealer-submit mode is the default and the model we build against. It requires no credential sharing."
+        />
+        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-2">
+          <div className="bg-card p-7 sm:p-10">
+            <div className="flex items-center gap-3">
+              <h3 className="text-lg font-semibold tracking-tight">Dealer-submit mode</h3>
+              <span className="rounded-sm border border-accent/40 px-2 py-[3px] font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
+                Default
+              </span>
+            </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Two River Ops builds, validates, packages and works the claim. The dealer performs any
+              OEM-required attestation and final submission.
+            </p>
+          </div>
+          <div className="bg-background p-7 sm:p-10">
+            <h3 className="text-lg font-semibold tracking-tight">Authorized-agent mode</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Where an OEM explicitly permits delegated access, Two River Ops can execute the
+              approved submission workflow directly — only under that explicit permission.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OemControls() {
+  const points = [
+    "Cleaner, more complete submissions",
+    "Fewer avoidable corrections and resubmissions",
+    "Dealer accountability preserved",
+    "Full provenance and audit trail on every claim",
+    "Parts-retention obligations tracked and acknowledged",
+    "No credential sharing or impersonation",
+    "Confidential OEM and dealer materials segregated, and not used to train public or general-purpose models",
+  ];
+  return (
+    <section className="border-b border-border bg-stone-warm">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <SectionHead
+          eyebrow="For OEM stakeholders"
+          title="Built to strengthen OEM controls, not bypass them."
+        />
+        <ul className="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2">
+          {points.map((p) => (
+            <li key={p} className="bg-stone-warm px-6 py-5 text-sm leading-relaxed">
+              {p}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+          Structured claim data can also improve field-failure visibility by turning inconsistent
+          technician narratives into consistent failure signals.
+        </p>
       </div>
     </section>
   );
