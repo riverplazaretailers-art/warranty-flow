@@ -48,8 +48,13 @@ const STEPS = [
     "Submitted through the approved workflow",
     "Filed on the dealer's account, within the authorization the dealer has granted.",
   ],
-  ["05", "Routine exceptions worked", "Coding, documentation and resubmission windows handled without a queue."],
-  ["06", "Payment tracked and reconciled", "Credits and short-pays are matched against what was claimed."],
+  [
+    "05",
+    "Parts retention flagged",
+    "When a failed component must be retained, the dealer is prompted to acknowledge the obligation; physical custody and production stay with the dealer.",
+  ],
+  ["06", "Routine exceptions worked", "Coding, documentation and resubmission windows handled without a queue."],
+  ["07", "Payment tracked and reconciled", "Credits and short-pays are matched against what was claimed."],
 ];
 
 const PILLARS = [
