@@ -563,6 +563,10 @@ function Pilot() {
               </li>
             ))}
           </ul>
+          <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+            Our ideal first pilots are dealers willing to sponsor an introduction to their OEM
+            representative once performance has been demonstrated.
+          </p>
           <div className="mt-8 border-t border-border pt-8">
             <p className="eyebrow">What we measure together</p>
             <ul className="mt-5 space-y-2.5">
