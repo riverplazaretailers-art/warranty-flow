@@ -4,9 +4,9 @@ import { useState } from "react";
 
 import { submitPilotLead } from "@/lib/pilot-leads.functions";
 
-const TITLE = "Two River Ops | AI Warranty Operations for Equipment Dealers";
+const TITLE = "Two River Ops | Managed Warranty Administration for Equipment Dealers";
 const DESCRIPTION =
-  "Two River Ops is building a managed, AI-operated warranty administration service for equipment dealers: repair records become complete claims, routine exceptions are worked, and reimbursement is tracked.";
+  "Two River Ops is building a managed warranty operation for equipment dealers: repair records become complete claims, routine exceptions are worked, reimbursement is tracked, and internal administrative burden drops.";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -16,7 +16,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
@@ -39,9 +41,29 @@ export const Route = createFileRoute("/")({
 const STEPS = [
   ["01", "Repair record received", "The work order, parts, labor and failure notes come in as they are."],
   ["02", "Claim built and checked", "Coverage, causal part and documentation are assembled and validated."],
-  ["03", "Submitted through approved OEM workflow", "Filed on the dealer's account, under the dealer's authorization."],
-  ["04", "Routine issues worked", "Coding, documentation and resubmission windows are handled without a queue."],
-  ["05", "Payment tracked and reconciled", "Credits and short-pays are matched against what was claimed."],
+  ["03", "Prepared for submission", "The claim is completed and packaged against that OEM's requirements."],
+  [
+    "04",
+    "Submitted through the approved workflow",
+    "Filed on the dealer's account, within the authorization the dealer has granted.",
+  ],
+  ["05", "Routine exceptions worked", "Coding, documentation and resubmission windows handled without a queue."],
+  ["06", "Payment tracked and reconciled", "Credits and short-pays are matched against what was claimed."],
+];
+
+const PILLARS = [
+  [
+    "Less admin burden",
+    "The repetitive claim work leaves the dealership. Your team answers questions instead of building, chasing and reworking claims.",
+  ],
+  [
+    "More warranty dollars recovered",
+    "Claims that are incomplete, denied, short-paid or simply never filed are the leakage we are built to close.",
+  ],
+  [
+    "Faster claim-to-cash",
+    "Claims move on a worked queue rather than whenever someone has time, so aging and resubmission windows stop slipping.",
+  ],
 ];
 
 const TRADITIONAL = [
@@ -58,10 +80,18 @@ const TRO = [
   "Intake and structure the repair record",
   "Build a grounded claim",
   "Validate requirements",
-  "Execute the approved workflow",
+  "Prepare and submit within approved authorization",
   "Work routine exceptions",
   "Track reimbursement",
   "Escalate only missing facts",
+];
+
+const MEASURES = [
+  "Internal touches per claim",
+  "Exceptions per 100 claims",
+  "Claim aging",
+  "Recovered leakage",
+  "Reimbursement cycle time",
 ];
 
 function Index() {
@@ -72,6 +102,7 @@ function Index() {
         <Hero />
         <Credibility />
         <HowItWorks />
+        <Pillars />
         <Differentiation />
         <Products />
         <Pilot />
@@ -134,12 +165,15 @@ function Hero() {
         <div className="fade-up max-w-3xl">
           <p className="eyebrow">AI operations for equipment dealers</p>
           <h1 className="mt-8 text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-            Warranty administration, handled.
+            Own the repair.
+            <br />
+            We&rsquo;ll own the warranty workflow.
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Two River Ops is building a managed warranty operation that turns repair records into
-            complete claims, works routine exceptions, and tracks reimbursement — with people only
-            where judgment is actually required.
+            Two River Ops is building a managed warranty operation for equipment dealers: repair
+            records become complete claims, routine exceptions get worked, reimbursement is tracked,
+            and only missing facts come back to your team. The goal is more warranty dollars
+            recovered with less administrative load inside the dealership.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
@@ -166,7 +200,7 @@ function WorkflowVisual() {
   const nodes = [
     ["Repair record", "Received"],
     ["Claim build", "Checked"],
-    ["Submission", "Approved workflow"],
+    ["Submission", "Prepared"],
     ["Exceptions", "Worked"],
     ["Reimbursement", "Reconciled"],
   ];
@@ -184,7 +218,10 @@ function WorkflowVisual() {
         {nodes.map(([label, status], i) => (
           <li key={label} className="relative bg-background px-1 py-5 sm:px-4">
             <div className="flex items-center gap-3">
-              <span className="flow-dot h-[7px] w-[7px] shrink-0 rounded-full bg-accent" style={{ animationDelay: `${i * 400}ms` }} />
+              <span
+                className="flow-dot h-[7px] w-[7px] shrink-0 rounded-full bg-accent"
+                style={{ animationDelay: `${i * 400}ms` }}
+              />
               <span className="h-px flex-1 bg-border" />
             </div>
             <p className="mt-4 text-sm font-medium leading-snug">{label}</p>
@@ -251,6 +288,43 @@ function HowItWorks() {
             </li>
           ))}
         </ol>
+        <div className="mt-10 grid gap-8 border border-border p-7 sm:grid-cols-2 sm:p-8">
+          <div>
+            <p className="eyebrow">Control stays with the dealer</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              The dealer remains the OEM account owner. Two River Ops acts only within the
+              authorization the dealer grants, and routes attestations and irreducible facts back to
+              the dealer whenever a program requires them.
+            </p>
+          </div>
+          <div>
+            <p className="eyebrow">Data in, work out</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Early pilots can start with exports, SFTP drops or a shared folder. Deep DMS
+              integration is not required on day one — we work from the repair records you can
+              already produce.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Pillars() {
+  return (
+    <section className="border-b border-border bg-stone-warm">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <SectionHead eyebrow="Why it matters" title="What a managed warranty operation changes." />
+        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-3">
+          {PILLARS.map(([title, body], i) => (
+            <div key={title} className="bg-stone-warm p-7 sm:p-9">
+              <span className="font-mono text-[11px] text-accent">{`0${i + 1}`}</span>
+              <h3 className="mt-5 text-lg font-semibold tracking-tight">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -258,16 +332,16 @@ function HowItWorks() {
 
 function Differentiation() {
   return (
-    <section className="border-b border-border bg-stone-warm">
+    <section className="border-b border-border">
       <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
         <SectionHead
           eyebrow="Difference"
-          title="We are not building another tool for your warranty administrator."
-          lead="The target operating model is simpler: the dealer sends the work; Two River Ops owns the workflow."
+          title="Not another warranty tool. An operating service."
+          lead="The dealer sends the work; Two River Ops owns the workflow — operating under the dealer's authorization, with attestations returned to the dealer where a program requires them."
         />
         <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-2">
           <div className="bg-background p-7 sm:p-10">
-            <p className="eyebrow">Traditional warranty admin</p>
+            <p className="eyebrow">Work the dealership carries today</p>
             <ul className="mt-7 space-y-3.5">
               {TRADITIONAL.map((t) => (
                 <li key={t} className="flex gap-3 text-sm text-muted-foreground">
@@ -278,7 +352,7 @@ function Differentiation() {
             </ul>
           </div>
           <div className="bg-card p-7 sm:p-10">
-            <p className="eyebrow text-accent">Two River Ops</p>
+            <p className="eyebrow text-accent">Work Two River Ops takes on</p>
             <ul className="mt-7 space-y-3.5">
               {TRO.map((t) => (
                 <li key={t} className="flex gap-3 text-sm">
@@ -290,8 +364,8 @@ function Differentiation() {
           </div>
         </div>
         <p className="mt-6 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-          Pilot performance will determine how much of each OEM workflow can be handled
-          autonomously.
+          Coverage varies by OEM program. Pilot performance will determine how much of each workflow
+          can be handled autonomously and where dealer authorization must stay in the loop.
         </p>
       </div>
     </section>
@@ -300,11 +374,11 @@ function Differentiation() {
 
 function Products() {
   return (
-    <section className="border-b border-border">
+    <section className="border-b border-border bg-stone-warm">
       <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
         <SectionHead eyebrow="Products" title="Two ways to start." />
-        <div className="mt-16 grid gap-px border-y border-border bg-border md:grid-cols-2">
-          <article className="bg-background p-8 sm:p-10">
+        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-2">
+          <article className="bg-stone-warm p-8 sm:p-10">
             <div className="flex items-center gap-3">
               <h3 className="text-xl font-semibold tracking-tight">Managed Warranty</h3>
               <span className="rounded-sm border border-accent/40 px-2 py-[3px] font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
@@ -312,13 +386,14 @@ function Products() {
               </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Ongoing warranty administration from repair record through reimbursement.
+              Ongoing administration from repair record through reimbursement, including routine
+              exception handling and reconciliation.
             </p>
           </article>
-          <article className="bg-background p-8 sm:p-10">
+          <article className="bg-stone-warm p-8 sm:p-10">
             <h3 className="text-xl font-semibold tracking-tight">Recovery</h3>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Fixed-fee review of historical denied, short-paid, or abandoned warranty claims.
+              A fixed-fee review of denied, short-paid, missed, aging or abandoned warranty claims.
             </p>
           </article>
         </div>
@@ -329,13 +404,13 @@ function Products() {
 
 function Pilot() {
   return (
-    <section id="pilot" className="border-b border-border bg-stone-warm">
+    <section id="pilot" className="border-b border-border">
       <div className="mx-auto grid max-w-5xl gap-16 px-6 py-24 md:py-32 lg:grid-cols-[1fr_1fr]">
         <div>
           <SectionHead
             eyebrow="Pilot program"
             title="Help us build the warranty operation you actually want."
-            lead="We are selecting a small number of construction, agricultural, material-handling, and commercial equipment dealers for one-OEM, capped-volume pilots."
+            lead="We are selecting a small number of construction, agricultural, material-handling and commercial equipment dealers for one-OEM, capped-volume pilots."
           />
           <ul className="mt-10 grid gap-px border border-border bg-border sm:grid-cols-2">
             {[
@@ -344,11 +419,26 @@ function Pilot() {
               "Dealer-controlled authorization",
               "Escalation only for missing facts",
             ].map((t) => (
-              <li key={t} className="bg-stone-warm px-5 py-4 text-sm font-medium tracking-tight">
+              <li key={t} className="bg-background px-5 py-4 text-sm font-medium tracking-tight">
                 {t}
               </li>
             ))}
           </ul>
+          <div className="mt-8 border-t border-border pt-8">
+            <p className="eyebrow">What we measure together</p>
+            <ul className="mt-5 space-y-2.5">
+              {MEASURES.map((m) => (
+                <li key={m} className="flex gap-3 text-sm text-muted-foreground">
+                  <span aria-hidden className="mt-[9px] h-px w-4 shrink-0 bg-accent" />
+                  {m}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 max-w-md text-xs leading-relaxed text-muted-foreground">
+              We baseline these with you at the start of a pilot. We are not publishing target
+              numbers until the pilots produce them.
+            </p>
+          </div>
         </div>
         <PilotForm />
       </div>
@@ -361,6 +451,7 @@ function PilotForm() {
   const [submitted, setSubmitted] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [sharedRole, setSharedRole] = useState("");
 
   if (submitted) {
     return (
@@ -402,6 +493,14 @@ function PilotForm() {
               work_email: String(fd.get("work_email") ?? ""),
               company: String(fd.get("company") ?? ""),
               oem_brands: String(fd.get("oem_brands") ?? ""),
+              first_oem: String(fd.get("first_oem") ?? ""),
+              dms: String(fd.get("dms") ?? ""),
+              claims_per_month: String(fd.get("claims_per_month") ?? ""),
+              admin_shared_role: (String(fd.get("admin_shared_role") ?? "") || "") as
+                | "yes"
+                | "no"
+                | "",
+              admin_shared_role_note: String(fd.get("admin_shared_role_note") ?? ""),
               note: String(fd.get("note") ?? ""),
               website: String(fd.get("website") ?? ""),
             },
@@ -420,7 +519,46 @@ function PilotForm() {
         <Field id="name" label="Name" required autoComplete="name" />
         <Field id="work_email" label="Work email" type="email" required autoComplete="email" />
         <Field id="company" label="Company" required autoComplete="organization" />
-        <Field id="oem_brands" label="OEM brands represented" placeholder="Brands you carry" />
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field id="oem_brands" label="OEM brands represented" placeholder="Brands you carry" />
+          <Field id="first_oem" label="OEM to pilot first" placeholder="One program" />
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <Field id="dms" label="Current DMS" placeholder="System of record" />
+          <SelectField
+            id="claims_per_month"
+            label="Warranty claims / month"
+            options={["", "Under 25", "25–75", "75–200", "200–500", "500+"]}
+          />
+        </div>
+        <fieldset>
+          <legend className="text-sm font-medium">
+            Does your warranty admin have other responsibilities?
+          </legend>
+          <div className="mt-2 flex gap-5">
+            {["yes", "no"].map((v) => (
+              <label key={v} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <input
+                  type="radio"
+                  name="admin_shared_role"
+                  value={v}
+                  checked={sharedRole === v}
+                  onChange={() => setSharedRole(v)}
+                  className="h-4 w-4 accent-[var(--accent)]"
+                />
+                {v === "yes" ? "Yes" : "No"}
+              </label>
+            ))}
+          </div>
+          {sharedRole === "yes" && (
+            <input
+              name="admin_shared_role_note"
+              maxLength={500}
+              placeholder="What else do they cover? (optional)"
+              className="mt-3 h-11 w-full rounded-sm border border-input bg-background px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-accent focus:ring-2 focus:ring-accent/20"
+            />
+          )}
+        </fieldset>
         <div>
           <label htmlFor="note" className="block text-sm font-medium">
             Note <span className="font-normal text-muted-foreground">(optional)</span>
@@ -431,7 +569,7 @@ function PilotForm() {
             rows={3}
             maxLength={1000}
             className="mt-2 w-full resize-none rounded-sm border border-input bg-background px-3 py-2.5 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-accent focus:ring-2 focus:ring-accent/20"
-            placeholder="Claim volume, current process, anything relevant."
+            placeholder="Current process, backlog, anything relevant."
           />
         </div>
         <div aria-hidden className="hidden">
@@ -451,6 +589,28 @@ function PilotForm() {
         We use this only to evaluate pilot fit. No newsletter, no resale.
       </p>
     </form>
+  );
+}
+
+function SelectField({ id, label, options }: { id: string; label: string; options: string[] }) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium">
+        {label}
+      </label>
+      <select
+        id={id}
+        name={id}
+        defaultValue=""
+        className="mt-2 h-11 w-full rounded-sm border border-input bg-background px-3 text-sm outline-none transition-colors focus:border-accent focus:ring-2 focus:ring-accent/20"
+      >
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o === "" ? "Select" : o}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
 
@@ -490,7 +650,7 @@ function Field({
 
 function About() {
   return (
-    <section id="about" className="border-b border-border">
+    <section id="about" className="border-b border-border bg-stone-warm">
       <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
         <div className="max-w-3xl">
           <p className="eyebrow">About</p>
@@ -513,7 +673,9 @@ function Footer() {
       <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Wordmark />
-          <p className="mt-2 text-sm text-muted-foreground">Equipment operations, rebuilt for AI.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            AI-operated back-office infrastructure for equipment operations. Warranty first.
+          </p>
         </div>
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
           <a href="#" className="transition-colors hover:text-foreground">

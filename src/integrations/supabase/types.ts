@@ -16,8 +16,13 @@ export type Database = {
     Tables: {
       pilot_leads: {
         Row: {
+          admin_shared_role: boolean | null
+          admin_shared_role_note: string | null
+          claims_per_month: string | null
           company: string
           created_at: string
+          dms: string | null
+          first_oem: string | null
           id: string
           name: string
           note: string | null
@@ -26,8 +31,13 @@ export type Database = {
           work_email: string
         }
         Insert: {
+          admin_shared_role?: boolean | null
+          admin_shared_role_note?: string | null
+          claims_per_month?: string | null
           company: string
           created_at?: string
+          dms?: string | null
+          first_oem?: string | null
           id?: string
           name: string
           note?: string | null
@@ -36,8 +46,13 @@ export type Database = {
           work_email: string
         }
         Update: {
+          admin_shared_role?: boolean | null
+          admin_shared_role_note?: string | null
+          claims_per_month?: string | null
           company?: string
           created_at?: string
+          dms?: string | null
+          first_oem?: string | null
           id?: string
           name?: string
           note?: string | null
