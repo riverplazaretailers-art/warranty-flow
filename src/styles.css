@@ -150,3 +150,45 @@
     color: var(--color-foreground);
   }
 }
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility rule-grid {
+  background-image: linear-gradient(to right, var(--rule) 1px, transparent 1px);
+  background-size: 96px 100%;
+}
+
+@utility fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flowPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility flow-dot {
+  animation: flowPulse 3.2s ease-in-out infinite;
+}
