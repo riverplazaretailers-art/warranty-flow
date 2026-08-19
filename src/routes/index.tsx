@@ -158,10 +158,10 @@ function Nav() {
         </a>
         <nav className="flex items-center gap-6">
           <a
-            href="#audit"
+            href="#gap"
             className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
           >
-            Leakage audit
+            The gap
           </a>
           <a
             href="#warranty"
@@ -175,12 +175,12 @@ function Nav() {
           >
             About
           </a>
-          <a
-            href="#pilot"
+          <Link
+            to="/demo/new"
             className="inline-flex h-9 items-center rounded-sm bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
           >
-            Join the pilot
-          </a>
+            Run a claim preflight
+          </Link>
         </nav>
       </div>
     </header>
@@ -192,35 +192,103 @@ function Hero() {
     <section id="top" className="border-b border-border">
       <div className="mx-auto max-w-5xl px-6 pb-20 pt-24 md:pb-28 md:pt-32">
         <div className="fade-up max-w-3xl">
-          <p className="eyebrow">AI operations for equipment dealers</p>
+          <p className="eyebrow">Warranty claim preflight for equipment dealers</p>
           <h1 className="mt-8 text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-            Own the repair.
-            <br />
-            We&rsquo;ll own the warranty workflow.
+            Find what is missing before the claim is submitted.
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Two River Ops is a managed warranty operation for equipment dealers. We execute the
-            claim work — building, validating, filing and following through to reimbursement — so
-            the dealership carries less administrative load, recovers more of the warranty dollars
-            it has legitimately earned, and gets paid sooner. Accountability and OEM controls stay
-            where they belong.
+            Warranty Flow reads a repair record and returns two things: an evidence-linked claim
+            packet, and the smallest set of missing-fact questions needed to complete it. Every fact
+            points back to the page, row or line it came from. The dealer confirms eligibility,
+            coding, attestation and submission — dealer-submit is the default.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a
-              href="#audit"
+            <Link
+              to="/demo/new"
               className="inline-flex h-11 items-center rounded-sm bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent"
             >
-              Start with a leakage audit
-            </a>
+              Run a claim preflight
+            </Link>
             <a
               href="#pilot"
               className="inline-flex h-11 items-center rounded-sm border border-border px-6 text-sm font-medium transition-colors hover:border-foreground/30 hover:bg-stone-warm"
             >
-              Join the managed pilot
+              Request private beta access
             </a>
           </div>
+          <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+            Synthetic demo — runs in your browser, no upload, no real claim data
+          </p>
         </div>
         <WorkflowVisual />
+      </div>
+    </section>
+  );
+}
+
+function ExpensiveGap() {
+  const items = [
+    [
+      "Claims go out incomplete",
+      "A missing meter reading, an unrecorded causal part, a narrative that does not state a failure mode — each one comes back as a correction days or weeks later.",
+    ],
+    [
+      "Rework lands on one person",
+      "The claim is rebuilt from a record nobody wants to re-read, usually by the one person who knows where the facts live.",
+    ],
+    [
+      "Deadlines close quietly",
+      "Filing and resubmission windows pass while a claim sits waiting for a fact somebody could have supplied on day one.",
+    ],
+  ];
+  return (
+    <section id="gap" className="border-b border-border">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <SectionHead
+          eyebrow="The expensive gap"
+          title="The problem is not filing. It is what was never in the record."
+          lead="Warranty work is rejected, corrected or short-paid over facts that were missing at the moment of submission — and nobody knew which ones."
+        />
+        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-3">
+          {items.map(([title, body]) => (
+            <div key={title} className="bg-background p-7 sm:p-9">
+              <h3 className="text-base font-medium tracking-tight">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Output() {
+  const outputs = [
+    ["Claim packet", "Ordered facts, findings and questions, exportable as JSON, CSV or print-to-PDF."],
+    ["Evidence reference", "File and page, row or line for every extracted fact, plus how it was obtained."],
+    ["Completeness review", "Blockers, warnings and confirmed facts from fixed deterministic rules."],
+    ["Missing-fact questions", "One specific question per gap — not a claim handed back to rework."],
+  ];
+  return (
+    <section className="border-b border-border bg-stone-warm">
+      <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
+        <SectionHead
+          eyebrow="The output"
+          title="A packet you can act on, and a short list of what is still unknown."
+          lead="A PDF with no text layer is reported as “OCR required”, never silently treated as an empty record."
+        />
+        <div className="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2">
+          {outputs.map(([title, body]) => (
+            <div key={title} className="bg-stone-warm p-7 sm:p-9">
+              <h3 className="text-base font-medium tracking-tight">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+          Decision support only. Warranty Flow does not determine eligibility, does not submit to an
+          OEM, and has no DMS or OEM portal integration.
+        </p>
       </div>
     </section>
   );
@@ -229,9 +297,10 @@ function Hero() {
 function WorkflowVisual() {
   const nodes = [
     ["Repair record", "Received"],
-    ["Claim build", "Checked"],
-    ["Submission", "Prepared"],
-    ["Exceptions", "Worked"],
+    ["Facts", "Extracted"],
+    ["Checks", "Run"],
+    ["Missing facts", "Asked"],
+
     ["Reimbursement", "Reconciled"],
   ];
   return (
