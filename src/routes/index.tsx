@@ -300,9 +300,9 @@ function WorkflowVisual() {
     ["Facts", "Extracted"],
     ["Checks", "Run"],
     ["Missing facts", "Asked"],
-
-    ["Reimbursement", "Reconciled"],
+    ["Claim packet", "Exported"],
   ];
+
   return (
     <div
       aria-hidden
