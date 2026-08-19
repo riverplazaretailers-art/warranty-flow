@@ -14,6 +14,7 @@ import { Route as DemoRouteImport } from './routes/demo'
 import { Route as DemoIndexRouteImport } from './routes/demo.index'
 import { Route as DemoHelpRouteImport } from './routes/demo.help'
 import { Route as DemoHistoryRouteImport } from './routes/demo.history'
+import { Route as DemoNewRouteImport } from './routes/demo.new'
 import { Route as DemoSettingsRouteImport } from './routes/demo.settings'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const DemoHistoryRoute = DemoHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => DemoRoute,
 } as any)
+const DemoNewRoute = DemoNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => DemoRoute,
+} as any)
 const DemoSettingsRoute = DemoSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRouteWithChildren
   '/demo/help': typeof DemoHelpRoute
   '/demo/history': typeof DemoHistoryRoute
+  '/demo/new': typeof DemoNewRoute
   '/demo/settings': typeof DemoSettingsRoute
   '/demo/': typeof DemoIndexRoute
 }
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo/help': typeof DemoHelpRoute
   '/demo/history': typeof DemoHistoryRoute
+  '/demo/new': typeof DemoNewRoute
   '/demo/settings': typeof DemoSettingsRoute
   '/demo': typeof DemoIndexRoute
 }
@@ -68,21 +76,35 @@ export interface FileRoutesById {
   '/demo': typeof DemoRouteWithChildren
   '/demo/help': typeof DemoHelpRoute
   '/demo/history': typeof DemoHistoryRoute
+  '/demo/new': typeof DemoNewRoute
   '/demo/settings': typeof DemoSettingsRoute
   '/demo/': typeof DemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/demo' | '/demo/help' | '/demo/history' | '/demo/settings' | '/demo/'
+    | '/'
+    | '/demo'
+    | '/demo/help'
+    | '/demo/history'
+    | '/demo/new'
+    | '/demo/settings'
+    | '/demo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo/help' | '/demo/history' | '/demo/settings' | '/demo'
+  to:
+    | '/'
+    | '/demo/help'
+    | '/demo/history'
+    | '/demo/new'
+    | '/demo/settings'
+    | '/demo'
   id:
     | '__root__'
     | '/'
     | '/demo'
     | '/demo/help'
     | '/demo/history'
+    | '/demo/new'
     | '/demo/settings'
     | '/demo/'
   fileRoutesById: FileRoutesById
@@ -129,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoHistoryRouteImport
       parentRoute: typeof DemoRoute
     }
+    '/demo/new': {
+      id: '/demo/new'
+      path: '/new'
+      fullPath: '/demo/new'
+      preLoaderRoute: typeof DemoNewRouteImport
+      parentRoute: typeof DemoRoute
+    }
     '/demo/settings': {
       id: '/demo/settings'
       path: '/settings'
@@ -142,6 +171,7 @@ declare module '@tanstack/react-router' {
 interface DemoRouteChildren {
   DemoHelpRoute: typeof DemoHelpRoute
   DemoHistoryRoute: typeof DemoHistoryRoute
+  DemoNewRoute: typeof DemoNewRoute
   DemoSettingsRoute: typeof DemoSettingsRoute
   DemoIndexRoute: typeof DemoIndexRoute
 }
@@ -149,6 +179,7 @@ interface DemoRouteChildren {
 const DemoRouteChildren: DemoRouteChildren = {
   DemoHelpRoute: DemoHelpRoute,
   DemoHistoryRoute: DemoHistoryRoute,
+  DemoNewRoute: DemoNewRoute,
   DemoSettingsRoute: DemoSettingsRoute,
   DemoIndexRoute: DemoIndexRoute,
 }
