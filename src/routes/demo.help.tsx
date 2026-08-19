@@ -2,7 +2,28 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { PageHead, Panel } from "@/components/demo/demo-ui";
 
-export const Route = createFileRoute("/demo/help")({ component: Help });
+export const Route = createFileRoute("/demo/help")({
+  component: Help,
+  head: () => ({
+    meta: [
+      { title: "Warranty Flow demo help | Warranty Flow" },
+      {
+        name: "description",
+        content:
+          "How preflight statuses, evidence references and browser-local storage work in the Warranty Flow synthetic demo.",
+      },
+      { property: "og:title", content: "Warranty Flow demo help | Warranty Flow" },
+      {
+        property: "og:description",
+        content:
+          "How preflight statuses, evidence references and browser-local storage work in the Warranty Flow synthetic demo.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+});
 
 const SECTIONS: [string, string[]][] = [
   [

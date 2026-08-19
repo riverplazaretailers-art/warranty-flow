@@ -18,7 +18,28 @@ import {
   toClaimPacketJson,
 } from "@/product-api/review";
 
-export const Route = createFileRoute("/demo/review/$id")({ component: ReviewPage });
+export const Route = createFileRoute("/demo/review/$id")({
+  component: ReviewPage,
+  head: () => ({
+    meta: [
+      { title: "Claim preflight review | Warranty Flow" },
+      {
+        name: "description",
+        content:
+          "Evidence-linked facts, blockers, warnings and the exact missing-fact questions for one synthetic claim review.",
+      },
+      { property: "og:title", content: "Claim preflight review | Warranty Flow" },
+      {
+        property: "og:description",
+        content:
+          "Evidence-linked facts, blockers, warnings and the exact missing-fact questions for one synthetic claim review.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+});
 
 function download(fileName: string, mediaType: string, content: string) {
   const url = URL.createObjectURL(new Blob([content], { type: mediaType }));

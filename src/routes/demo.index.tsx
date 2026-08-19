@@ -3,7 +3,28 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHead, Panel, StatusChip, buttonClass } from "@/components/demo/demo-ui";
 import { useDemoReviews } from "@/hooks/use-demo-reviews";
 
-export const Route = createFileRoute("/demo/")({ component: Dashboard });
+export const Route = createFileRoute("/demo/")({
+  component: Dashboard,
+  head: () => ({
+    meta: [
+      { title: "Warranty Flow demo dashboard | Warranty Flow" },
+      {
+        name: "description",
+        content:
+          "Recent synthetic claim preflights, statuses and blockers, plus a new claim review action.",
+      },
+      { property: "og:title", content: "Warranty Flow demo dashboard | Warranty Flow" },
+      {
+        property: "og:description",
+        content:
+          "Recent synthetic claim preflights, statuses and blockers, plus a new claim review action.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+});
 
 function Dashboard() {
   const { reviews, loaded } = useDemoReviews();
@@ -51,10 +72,7 @@ function Dashboard() {
         ))}
       </div>
 
-      <Panel
-        title="Recent reviews"
-        description="Stored in this browser only. Nothing is uploaded."
-      >
+      <Panel title="Recent reviews" description="Stored in this browser only. Nothing is uploaded.">
         {reviews.length === 0 ? (
           <div className="px-5 py-10 text-sm text-muted-foreground">
             {loaded
@@ -88,7 +106,8 @@ function Dashboard() {
                       <StatusChip status={review.preflight?.status ?? "not_run"} />
                     </td>
                     <td className="px-5 py-3 font-mono text-xs">
-                      {review.preflight?.findings.filter((f) => f.severity === "blocker").length ?? 0}
+                      {review.preflight?.findings.filter((f) => f.severity === "blocker").length ??
+                        0}
                     </td>
                     <td className="px-5 py-3 text-xs text-muted-foreground">
                       {new Date(review.updatedAt).toLocaleString()}
