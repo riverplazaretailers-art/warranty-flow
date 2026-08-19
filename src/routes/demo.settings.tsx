@@ -4,7 +4,28 @@ import { PageHead, Panel, secondaryButtonClass } from "@/components/demo/demo-ui
 import { useDemoReviews } from "@/hooks/use-demo-reviews";
 import { resolveRuntimeConfig } from "@/product-api";
 
-export const Route = createFileRoute("/demo/settings")({ component: Settings });
+export const Route = createFileRoute("/demo/settings")({
+  component: Settings,
+  head: () => ({
+    meta: [
+      { title: "Warranty Flow demo settings | Warranty Flow" },
+      {
+        name: "description",
+        content:
+          "Runtime mode, capabilities and local data controls for the Warranty Flow synthetic demo workspace.",
+      },
+      { property: "og:title", content: "Warranty Flow demo settings | Warranty Flow" },
+      {
+        property: "og:description",
+        content:
+          "Runtime mode, capabilities and local data controls for the Warranty Flow synthetic demo workspace.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+});
 
 function Settings() {
   const { reviews, deleteAll } = useDemoReviews();
@@ -15,11 +36,19 @@ function Settings() {
     ["Reason", config.reason],
     ["Claim preflight", config.capabilities.claimPreflight ? "Available (local)" : "Unavailable"],
     ["Recovery upload", config.capabilities.recoveryUpload ? "Available" : "Not enabled"],
-    ["DMS ingestion", config.capabilities.dmsIngestion ? "Available" : "Planned — approval dependent"],
-    ["OEM submission", config.capabilities.oemSubmission ? "Available" : "Planned — approval dependent"],
+    [
+      "DMS ingestion",
+      config.capabilities.dmsIngestion ? "Available" : "Planned — approval dependent",
+    ],
+    [
+      "OEM submission",
+      config.capabilities.oemSubmission ? "Available" : "Planned — approval dependent",
+    ],
     [
       "Reimbursement reconciliation",
-      config.capabilities.reimbursementReconciliation ? "Available" : "Planned — approval dependent",
+      config.capabilities.reimbursementReconciliation
+        ? "Available"
+        : "Planned — approval dependent",
     ],
     ["Submission model", "Dealer-submit (default)"],
   ];

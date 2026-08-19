@@ -12,7 +12,28 @@ import {
   SYNTHETIC_SAMPLE_TEXT,
 } from "@/product-api/demo/samples";
 
-export const Route = createFileRoute("/demo/new")({ component: NewReview });
+export const Route = createFileRoute("/demo/new")({
+  component: NewReview,
+  head: () => ({
+    meta: [
+      { title: "Start a claim preflight | Warranty Flow" },
+      {
+        name: "description",
+        content:
+          "Load a synthetic repair order or a local PDF, TXT or CSV test file and run a browser-local claim preflight.",
+      },
+      { property: "og:title", content: "Start a claim preflight | Warranty Flow" },
+      {
+        property: "og:description",
+        content:
+          "Load a synthetic repair order or a local PDF, TXT or CSV test file and run a browser-local claim preflight.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+});
 
 function encode(text: string): ArrayBuffer {
   const encoded = new TextEncoder().encode(text);

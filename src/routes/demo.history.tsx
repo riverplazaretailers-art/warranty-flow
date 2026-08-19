@@ -3,7 +3,28 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHead, Panel, StatusChip, secondaryButtonClass } from "@/components/demo/demo-ui";
 import { useDemoReviews } from "@/hooks/use-demo-reviews";
 
-export const Route = createFileRoute("/demo/history")({ component: History });
+export const Route = createFileRoute("/demo/history")({
+  component: History,
+  head: () => ({
+    meta: [
+      { title: "Warranty Flow demo history | Warranty Flow" },
+      {
+        name: "description",
+        content:
+          "Every claim preflight you have run in this browser, with status and blocker counts. Stored locally only.",
+      },
+      { property: "og:title", content: "Warranty Flow demo history | Warranty Flow" },
+      {
+        property: "og:description",
+        content:
+          "Every claim preflight you have run in this browser, with status and blocker counts. Stored locally only.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+});
 
 function History() {
   const { reviews, loaded, deleteAll } = useDemoReviews();
@@ -34,7 +55,10 @@ function History() {
         ) : (
           <ul className="divide-y divide-border">
             {reviews.map((review) => (
-              <li key={review.id} className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+              <li
+                key={review.id}
+                className="flex flex-wrap items-center justify-between gap-3 px-5 py-4"
+              >
                 <div>
                   <Link
                     to="/demo/review/$id"
