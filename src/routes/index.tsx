@@ -4,11 +4,9 @@ import { useState } from "react";
 
 import { submitPilotLead } from "@/lib/pilot-leads.functions";
 
-const TITLE =
-  "Warranty Flow — A TwoRiverOps solution | Claim preflight for equipment dealers";
+const TITLE = "Warranty Flow — A TwoRiverOps solution | Claim preflight for equipment dealers";
 const DESCRIPTION =
   "Warranty Flow finds what is missing before a warranty claim is submitted: an evidence-linked claim packet plus the smallest set of missing-fact questions. Dealer-submit by default.";
-
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -62,7 +60,6 @@ const STEPS = [
     "You get the smallest set of specific questions. Answer them, re-run the checks, and export a claim-ready packet for dealer submission.",
   ],
 ];
-
 
 const PILLARS = [
   [
@@ -144,7 +141,6 @@ function Wordmark() {
       <span className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:inline">
         A TwoRiverOps solution
       </span>
-
     </span>
   );
 }
@@ -264,10 +260,22 @@ function ExpensiveGap() {
 
 function Output() {
   const outputs = [
-    ["Claim packet", "Ordered facts, findings and questions, exportable as JSON, CSV or print-to-PDF."],
-    ["Evidence reference", "File and page, row or line for every extracted fact, plus how it was obtained."],
-    ["Completeness review", "Blockers, warnings and confirmed facts from fixed deterministic rules."],
-    ["Missing-fact questions", "One specific question per gap — not a claim handed back to rework."],
+    [
+      "Claim packet",
+      "Ordered facts, findings and questions, exportable as JSON, CSV or print-to-PDF.",
+    ],
+    [
+      "Evidence reference",
+      "File and page, row or line for every extracted fact, plus how it was obtained.",
+    ],
+    [
+      "Completeness review",
+      "Blockers, warnings and confirmed facts from fixed deterministic rules.",
+    ],
+    [
+      "Missing-fact questions",
+      "One specific question per gap — not a claim handed back to rework.",
+    ],
   ];
   return (
     <section className="border-b border-border bg-stone-warm">
@@ -692,8 +700,18 @@ function PilotForm() {
           aria-hidden
           className="flex h-9 w-9 items-center justify-center rounded-full border border-accent/40"
         >
-          <svg viewBox="0 0 20 20" className="h-4 w-4 text-accent" fill="none" stroke="currentColor">
-            <path d="M4 10.5l4 4 8-9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            viewBox="0 0 20 20"
+            className="h-4 w-4 text-accent"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path
+              d="M4 10.5l4 4 8-9"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
         <h3 className="mt-6 text-xl font-semibold tracking-tight">Request received</h3>
@@ -729,9 +747,7 @@ function PilotForm() {
               dms: String(fd.get("dms") ?? ""),
               claims_per_month: String(fd.get("claims_per_month") ?? ""),
               admin_shared_role: (String(fd.get("admin_shared_role") ?? "") || "") as
-                | "yes"
-                | "no"
-                | "",
+                "yes" | "no" | "",
               admin_shared_role_note: String(fd.get("admin_shared_role_note") ?? ""),
               note: String(fd.get("note") ?? ""),
               oem_intro_ok: fd.get("oem_intro_ok") === "on",

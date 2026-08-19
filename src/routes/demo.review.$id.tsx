@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 
-import { PageHead, Panel, StatusChip, buttonClass, secondaryButtonClass } from "@/components/demo/demo-ui";
+import {
+  PageHead,
+  Panel,
+  StatusChip,
+  buttonClass,
+  secondaryButtonClass,
+} from "@/components/demo/demo-ui";
 import { getProductApi, type ClaimReview, type Finding } from "@/product-api";
 import { track } from "@/product-api/analytics";
 import {
@@ -94,7 +100,11 @@ function ReviewPage() {
         questionCount: result.questions.length,
       });
       if (result.status === "ready_for_dealer_review") {
-        track("first_successful_outcome", { mode: api.mode, reviewId: review.id, outcome: result.status });
+        track("first_successful_outcome", {
+          mode: api.mode,
+          reviewId: review.id,
+          outcome: result.status,
+        });
       }
       await persist({
         ...review,
@@ -126,7 +136,8 @@ function ReviewPage() {
   function exportPacket(format: "json" | "csv") {
     if (!review) return;
     const base = review.fileName.replace(/\.[^.]+$/, "");
-    if (format === "json") download(`${base}-claim-packet.json`, "application/json", toClaimPacketJson(review));
+    if (format === "json")
+      download(`${base}-claim-packet.json`, "application/json", toClaimPacketJson(review));
     else download(`${base}-claim-packet.csv`, "text/csv", toClaimPacketCsv(review));
     track("packet_exported", { mode: getProductApi().mode, reviewId: review.id, format });
   }
@@ -141,10 +152,18 @@ function ReviewPage() {
         lead="Decision support only. This does not determine warranty eligibility and it does not submit anything to an OEM. Dealer-submit mode is the default."
         action={
           <div className="flex flex-wrap gap-2 print:hidden">
-            <button type="button" className={secondaryButtonClass} onClick={() => exportPacket("json")}>
+            <button
+              type="button"
+              className={secondaryButtonClass}
+              onClick={() => exportPacket("json")}
+            >
               Export JSON
             </button>
-            <button type="button" className={secondaryButtonClass} onClick={() => exportPacket("csv")}>
+            <button
+              type="button"
+              className={secondaryButtonClass}
+              onClick={() => exportPacket("csv")}
+            >
               Export CSV
             </button>
             <button type="button" className={secondaryButtonClass} onClick={() => window.print()}>
@@ -195,10 +214,7 @@ function ReviewPage() {
           <div className="space-y-5 px-5 py-5">
             {questions.map((question) => (
               <div key={question.field}>
-                <label
-                  htmlFor={`answer-${question.field}`}
-                  className="block text-sm font-medium"
-                >
+                <label htmlFor={`answer-${question.field}`} className="block text-sm font-medium">
                   {question.label}
                 </label>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
@@ -248,9 +264,12 @@ function ReviewPage() {
                   <tr key={field.key} className="border-b border-border/70 align-top last:border-0">
                     <td className="px-5 py-3 font-medium">{field.label}</td>
                     <td className="px-5 py-3">{field.value}</td>
-                    <td className="px-5 py-3 font-mono text-xs text-muted-foreground">{field.source}</td>
                     <td className="px-5 py-3 font-mono text-xs text-muted-foreground">
-                      {field.evidence.map((reference) => evidenceLabel(reference)).join(" · ") || "—"}
+                      {field.source}
+                    </td>
+                    <td className="px-5 py-3 font-mono text-xs text-muted-foreground">
+                      {field.evidence.map((reference) => evidenceLabel(reference)).join(" · ") ||
+                        "—"}
                     </td>
                   </tr>
                 ))}

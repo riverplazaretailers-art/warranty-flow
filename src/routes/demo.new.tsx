@@ -37,8 +37,15 @@ function NewReview() {
     setError(null);
     const api = getProductApi();
     try {
-      track("claim_review_started", { mode: api.mode, workflow: "claim_preflight", synthetic: true });
-      track("document_uploaded", { mode: api.mode, fileType: extensionOf(input.fileName) || "unknown" });
+      track("claim_review_started", {
+        mode: api.mode,
+        workflow: "claim_preflight",
+        synthetic: true,
+      });
+      track("document_uploaded", {
+        mode: api.mode,
+        fileType: extensionOf(input.fileName) || "unknown",
+      });
 
       const extraction = await api.processDocument(input);
       track("extraction_completed", {
@@ -64,7 +71,11 @@ function NewReview() {
       await api.saveReview(review);
       await navigate({ to: "/demo/review/$id", params: { id: review.id } });
     } catch (cause) {
-      track("workflow_failed", { mode: api.mode, workflow: "claim_preflight", reason: "processing_error" });
+      track("workflow_failed", {
+        mode: api.mode,
+        workflow: "claim_preflight",
+        reason: "processing_error",
+      });
       setError(
         cause instanceof Error
           ? `This record could not be processed: ${cause.message}`
