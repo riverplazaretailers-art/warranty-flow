@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as DemoIndexRouteImport } from './routes/demo.index'
+import { Route as DemoHelpRouteImport } from './routes/demo.help'
+import { Route as DemoHistoryRouteImport } from './routes/demo.history'
+import { Route as DemoSettingsRouteImport } from './routes/demo.settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +26,70 @@ const DemoRoute = DemoRouteImport.update({
   path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoIndexRoute = DemoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DemoRoute,
+} as any)
+const DemoHelpRoute = DemoHelpRouteImport.update({
+  id: '/help',
+  path: '/help',
+  getParentRoute: () => DemoRoute,
+} as any)
+const DemoHistoryRoute = DemoHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => DemoRoute,
+} as any)
+const DemoSettingsRoute = DemoSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DemoRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo': typeof DemoRoute
+  '/demo': typeof DemoRouteWithChildren
+  '/demo/help': typeof DemoHelpRoute
+  '/demo/history': typeof DemoHistoryRoute
+  '/demo/settings': typeof DemoSettingsRoute
+  '/demo/': typeof DemoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo': typeof DemoRoute
+  '/demo/help': typeof DemoHelpRoute
+  '/demo/history': typeof DemoHistoryRoute
+  '/demo/settings': typeof DemoSettingsRoute
+  '/demo': typeof DemoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/demo': typeof DemoRoute
+  '/demo': typeof DemoRouteWithChildren
+  '/demo/help': typeof DemoHelpRoute
+  '/demo/history': typeof DemoHistoryRoute
+  '/demo/settings': typeof DemoSettingsRoute
+  '/demo/': typeof DemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo'
+  fullPaths:
+    '/' | '/demo' | '/demo/help' | '/demo/history' | '/demo/settings' | '/demo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo'
-  id: '__root__' | '/' | '/demo'
+  to: '/' | '/demo/help' | '/demo/history' | '/demo/settings' | '/demo'
+  id:
+    | '__root__'
+    | '/'
+    | '/demo'
+    | '/demo/help'
+    | '/demo/history'
+    | '/demo/settings'
+    | '/demo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DemoRoute: typeof DemoRoute
+  DemoRoute: typeof DemoRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +108,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/': {
+      id: '/demo/'
+      path: '/'
+      fullPath: '/demo/'
+      preLoaderRoute: typeof DemoIndexRouteImport
+      parentRoute: typeof DemoRoute
+    }
+    '/demo/help': {
+      id: '/demo/help'
+      path: '/help'
+      fullPath: '/demo/help'
+      preLoaderRoute: typeof DemoHelpRouteImport
+      parentRoute: typeof DemoRoute
+    }
+    '/demo/history': {
+      id: '/demo/history'
+      path: '/history'
+      fullPath: '/demo/history'
+      preLoaderRoute: typeof DemoHistoryRouteImport
+      parentRoute: typeof DemoRoute
+    }
+    '/demo/settings': {
+      id: '/demo/settings'
+      path: '/settings'
+      fullPath: '/demo/settings'
+      preLoaderRoute: typeof DemoSettingsRouteImport
+      parentRoute: typeof DemoRoute
+    }
   }
 }
 
+interface DemoRouteChildren {
+  DemoHelpRoute: typeof DemoHelpRoute
+  DemoHistoryRoute: typeof DemoHistoryRoute
+  DemoSettingsRoute: typeof DemoSettingsRoute
+  DemoIndexRoute: typeof DemoIndexRoute
+}
+
+const DemoRouteChildren: DemoRouteChildren = {
+  DemoHelpRoute: DemoHelpRoute,
+  DemoHistoryRoute: DemoHistoryRoute,
+  DemoSettingsRoute: DemoSettingsRoute,
+  DemoIndexRoute: DemoIndexRoute,
+}
+
+const DemoRouteWithChildren = DemoRoute._addFileChildren(DemoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DemoRoute: DemoRoute,
+  DemoRoute: DemoRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
