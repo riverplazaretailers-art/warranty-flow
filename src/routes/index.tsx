@@ -140,7 +140,11 @@ function Wordmark() {
         <span className="block h-px w-full bg-foreground/60" />
         <span className="block h-px w-2/3 bg-foreground/25" />
       </span>
-      <span className="text-[15px] font-semibold tracking-tight">Two River Ops</span>
+      <span className="text-[15px] font-semibold tracking-tight">Warranty Flow</span>
+      <span className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:inline">
+        A TwoRiverOps solution
+      </span>
+
     </span>
   );
 }
