@@ -114,6 +114,8 @@ function Index() {
       <main>
         <Hero />
         <Credibility />
+        <ExpensiveGap />
+        <Output />
         <HowItWorks />
         <Pillars />
         <Differentiation />
@@ -124,6 +126,7 @@ function Index() {
         <Pilot />
         <About />
       </main>
+
       <Footer />
     </div>
   );
