@@ -375,7 +375,7 @@ function HowItWorks() {
       <div className="mx-auto max-w-5xl px-6 py-24 md:py-32">
         <SectionHead
           eyebrow="How it works"
-          title="From repair record to reimbursement."
+          title="Repair record in, claim packet out — in four steps."
           lead="If a required fact is missing, the dealer gets one specific question — not a claim to rework."
         />
         <ol className="mt-16 divide-y divide-border border-y border-border">
