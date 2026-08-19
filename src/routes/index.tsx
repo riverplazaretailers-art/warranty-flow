@@ -1,13 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 
 import { submitPilotLead } from "@/lib/pilot-leads.functions";
 
 const TITLE =
-  "Two River Ops | Managed Warranty Administration & Warranty Leakage Audit for Equipment Dealers";
+  "Warranty Flow — A TwoRiverOps solution | Claim preflight for equipment dealers";
 const DESCRIPTION =
-  "Two River Ops owns warranty performance for equipment dealers: a fixed-fee warranty leakage audit followed by managed warranty administration — less admin burden, more legitimate warranty dollars recovered, faster claim-to-cash.";
+  "Warranty Flow finds what is missing before a warranty claim is submitted: an evidence-linked claim packet plus the smallest set of missing-fact questions. Dealer-submit by default.";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
