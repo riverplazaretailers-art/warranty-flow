@@ -41,22 +41,28 @@ export const Route = createFileRoute("/")({
 });
 
 const STEPS = [
-  ["01", "Repair record received", "The work order, parts, labor and failure notes come in as they are."],
-  ["02", "Claim built and checked", "Coverage, causal part and documentation are assembled and validated."],
-  ["03", "Prepared for submission", "The claim is completed and packaged against that OEM's requirements."],
+  [
+    "01",
+    "Bring the repair record",
+    "A repair order as PDF, TXT or CSV. In the demo it is processed in your browser; nothing is uploaded.",
+  ],
+  [
+    "02",
+    "Facts extracted with evidence",
+    "Work order, serial, dates, meter, complaint/cause/correction, causal part, parts and labor — each linked to the page, row or line it came from.",
+  ],
+  [
+    "03",
+    "Deterministic checks run",
+    "Fixed rules, not guesswork: missing required facts, date order, causal part against the parts list, and parts-retention wording.",
+  ],
   [
     "04",
-    "Submitted through the approved workflow",
-    "Filed on the dealer's account, within the authorization the dealer has granted.",
+    "Answer the gaps, export the packet",
+    "You get the smallest set of specific questions. Answer them, re-run the checks, and export a claim-ready packet for dealer submission.",
   ],
-  [
-    "05",
-    "Parts retention flagged",
-    "When a failed component must be retained, the dealer is prompted to acknowledge the obligation; physical custody and production stay with the dealer.",
-  ],
-  ["06", "Routine exceptions worked", "Coding, documentation and resubmission windows handled without a queue."],
-  ["07", "Payment tracked and reconciled", "Credits and short-pays are matched against what was claimed."],
 ];
+
 
 const PILLARS = [
   [
